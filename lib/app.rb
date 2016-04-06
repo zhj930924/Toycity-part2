@@ -35,10 +35,6 @@ def make_products_section
   end
 end
 
-def make_brands_section
-
-end
-
 def start
   setup_files # load, read, parse, and create the files
   create_report # create the report!
@@ -147,8 +143,82 @@ def ascii_art_brands
   $report_file.puts
 end
 
-# For each brand in the data set:
-	# Print the name of the brand
-	# Count and print the number of the brand's toys we stock
-	# Calculate and print the average price of the brand's toys
-	# Calculate and print the total sales volume of all the brand's toys combined
+def make_brands_section
+  setup_files
+  ascii_art_brands
+  brands.each do |brand|
+    print_brand_name(brand)
+    print_toys_stock(calc_toys_stock(brand))
+    print_avg_price_toys(avg_price_toys(calc_total_price_toys(brand), brand))
+    print_total_revenue(calc_total_revenue(brand))
+  end
+end
+
+# Generate unique brand array
+def brands
+  $products_hash['items'].map { |item| item['brand'] }.uniq
+end
+
+# Print the name of the brand
+def print_brand_name(brand)
+  $report_file.puts brand.upcase
+  make_bar
+end
+
+# Count the number of the brand's toys we stock
+def calc_toys_stock(brand)
+  total_stock = 0
+  $products_hash['items'].each do |toy|
+    if toy['brand'] == brand
+      total_stock += toy['stock'].to_i
+    end
+  end
+  total_stock
+end
+
+# Print the number of the brand's toys we stock
+def print_toys_stock(total_stock)
+  $report_file.puts "Numbers of Toys in Stock: #{total_stock}"
+end
+
+# Calculate the average price of the brand's toys
+def calc_total_price_toys(brand)
+  total_price = 0
+  $products_hash['items'].each do |toy|
+    total_price += toy['full-price'].to_f if toy['brand'] == brand
+  end
+  return total_price
+end
+
+def avg_price_toys(total_price, brand)
+  cnt_brand = 0
+  $products_hash['items'].each { |toy| cnt_brand += 1 if toy['brand'] == brand }
+  (total_price / cnt_brand).round(2)
+end
+
+# Print the average price of the brand's toys
+def print_avg_price_toys(avg_price)
+  $report_file.puts "Average Product Price: $#{avg_price}"
+end
+
+# Calculate total revenue of all the brand's toy sales combined
+
+def calc_total_revenue(brand)
+  total_revenue = 0
+  $products_hash['items'].each do |toy|
+    if toy['brand'] == brand
+      toy['purchases'].each do |purchase|
+        total_revenue += purchase['price']
+      end
+    end
+  end
+  total_revenue = total_revenue.round(2)
+end
+
+# Print the total revenue of all the brand's toy sales combined
+def print_total_revenue(total_revenue)
+  $report_file.puts "Total Sales: $#{total_revenue}"
+  $report_file.puts
+end
+
+make_brands_section
