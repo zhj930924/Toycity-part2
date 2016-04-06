@@ -5,7 +5,7 @@ def setup_files
   path = File.join(File.dirname(__FILE__), '../data/products.json')
   file = File.read(path)
   $products_hash = JSON.parse(file)
-  # $report_file = File.new("report.txt", "w+")
+  $report_file = File.new("report.txt", "w+")
 end
 
 def create_report
@@ -47,14 +47,32 @@ def make_bar
 end
 
 # Print "Sales Report" in ascii art
+def ascii_art_sales_report
+  puts " ____        _             ____                       _   "
+  puts "/ ___|  __ _| | ___  ___  |  _ \\ ___ _ __   ___  _ __| |_ "
+  puts "\\___ \\ / _` | |/ _ \\/ __| | |_) / _ \\ '_ \\ / _ \\| '__| __|"
+  puts " ___) | (_| | |  __/\\__ \\ |  _ <  __/ |_) | (_) | |  | |_ "
+  puts "|____/ \\__,_|_|\\___||___/ |_| \\_\\___| .__/ \\___/|_|   \\__|"
+  puts "                                    |_|                   "
+  puts
+end
 
 # Print today's date
 def show_today_date
   today = Date.today.strftime('%A, %B %d, %Y')
   puts "Today's Date: #{today}"
+  puts
 end
 
 # Print "Products" in ascii art
+def ascii_art_products
+  puts " ____                _            _        "
+  puts "|  _ \\ _ __ ___   __| |_   _  ___| |_ ___  "
+  puts "| |_) | '__/ _ \\ / _' | | | |/ __| __/ __| "
+  puts "|  __/| | | (_) | (_| | |_| | (__| |_\\__ \\ "
+  puts "|_|   |_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/ "
+  puts
+end
 
 # For each product in the data set:
 	# Print the name of the toy
@@ -65,6 +83,14 @@ end
 	# Calculate and print the average discount (% or $) based off the average sales price
 
 # Print "Brands" in ascii art
+def ascii_art_brands
+  puts " ____                      _      "
+  puts "| __ ) _ __ __ _ _ __   __| |___  "
+  puts "|  _ \\| '__/ _` | '_ \\ / _` / __| "
+  puts "| |_) | | | (_| | | | | (_| \\__ \\ "
+  puts "|____/|_|  \\__,_|_| |_|\\__,_|___/ "
+  puts
+end
 
 # For each brand in the data set:
 	# Print the name of the brand
