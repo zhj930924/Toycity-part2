@@ -1,0 +1,51 @@
+commit 7c3b3037c7b5f769745edd96c5d1ff27eff7fd38
+Author: Jing <zhj930924@gmail.com>
+Date:   Wed Apr 6 04:00:36 2016 -0400
+
+    Completed the project
+    
+    Finished print heading, create report method and generated the complete
+    report
+
+commit aafb513632bcdf80bf13878eadf0992dbf764495
+Author: Jing <zhj930924@gmail.com>
+Date:   Wed Apr 6 03:27:40 2016 -0400
+
+    Finished brands section
+    
+    define calculation and print methods for brands section;
+    finished make_brands_section method.
+
+commit b9e30f2d76fc53e50df3872fb9cba4c1d921eea5
+Author: Jing <zhj930924@gmail.com>
+Date:   Wed Apr 6 03:00:47 2016 -0400
+
+    Finished products section
+    
+    define calculation and print methods for products section; finished
+    make_products_section method.
+
+commit 640c6c1111f838dedd6702de03aa5fee021de207
+Author: Jing <zhj930924@gmail.com>
+Date:   Wed Apr 6 01:49:25 2016 -0400
+
+    Created ascii arts for all
+    
+    create and format ascii arts for "Sales Report", "Products" and "Brands"
+
+commit 02b66b9318721b8ffb484bd8662229736a4ff289
+Author: Jing <zhj930924@gmail.com>
+Date:   Wed Apr 6 01:41:13 2016 -0400
+
+    Completed global setup
+    
+    create overall structure;
+    define empty methods;
+    create make bar method;
+    create print date method.
+
+commit 06ecf78f7455ddecafefa84181ac0326364c140d
+Author: Jing <zhj930924@gmail.com>
+Date:   Wed Apr 6 00:02:07 2016 -0400
+
+    Initial commit
