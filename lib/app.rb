@@ -1,6 +1,7 @@
 require 'json'
 require 'date'
 
+# Read data from JSON and write report to text file
 def setup_files
   path = File.join(File.dirname(__FILE__), '../data/products.json')
   file = File.read(path)
@@ -8,39 +9,7 @@ def setup_files
   $report_file = File.new("report.txt", "w+")
 end
 
-def create_report
-  print_heading
-  print_data
-end
-
-def print_heading
-end
-
-def print_data
-  make_products_section
-  make_brands_section
-end
-
-def make_products_section
-  ascii_art_products
-  $products_hash['items'].each do |toy|
-    print_toy_name(toy)
-    print_retail_price(calc_retail_price(toy))
-    print_num_purchases(calc_num_purchases(toy))
-    print_total_sales(calc_total_sales(toy))
-    print_avg_price(calc_avg_price(calc_total_sales(toy),
-    calc_num_purchases(toy)))
-    print_avg_discount(calc_avg_discount(calc_retail_price(toy),
-    calc_avg_price(calc_total_sales(toy), calc_num_purchases(toy))))
-  end
-end
-
-def start
-  setup_files # load, read, parse, and create the files
-  create_report # create the report!
-end
-
-# make ************ bar
+# Helper method: make ************ bar
 def make_bar(len = 32)
     $report_file.puts '*' * len
 end
@@ -132,7 +101,6 @@ def print_avg_discount(avg_discount)
   $report_file.puts
 end
 
-
 # Print "Brands" in ascii art
 def ascii_art_brands
   $report_file.puts " ____                      _      "
@@ -141,17 +109,6 @@ def ascii_art_brands
   $report_file.puts "| |_) | | | (_| | | | | (_| \\__ \\ "
   $report_file.puts "|____/|_|  \\__,_|_| |_|\\__,_|___/ "
   $report_file.puts
-end
-
-def make_brands_section
-  setup_files
-  ascii_art_brands
-  brands.each do |brand|
-    print_brand_name(brand)
-    print_toys_stock(calc_toys_stock(brand))
-    print_avg_price_toys(avg_price_toys(calc_total_price_toys(brand), brand))
-    print_total_revenue(calc_total_revenue(brand))
-  end
 end
 
 # Generate unique brand array
@@ -221,4 +178,56 @@ def print_total_revenue(total_revenue)
   $report_file.puts
 end
 
-make_brands_section
+#######################################################################
+#######################################################################
+
+# Generate report for each product
+def make_products_section
+  ascii_art_products
+  $products_hash['items'].each do |toy|
+    print_toy_name(toy)
+    print_retail_price(calc_retail_price(toy))
+    print_num_purchases(calc_num_purchases(toy))
+    print_total_sales(calc_total_sales(toy))
+    print_avg_price(calc_avg_price(calc_total_sales(toy),
+    calc_num_purchases(toy)))
+    print_avg_discount(calc_avg_discount(calc_retail_price(toy),
+    calc_avg_price(calc_total_sales(toy), calc_num_purchases(toy))))
+  end
+end
+
+# Generate report for each brand
+def make_brands_section
+  ascii_art_brands
+  brands.each do |brand|
+    print_brand_name(brand)
+    print_toys_stock(calc_toys_stock(brand))
+    print_avg_price_toys(avg_price_toys(calc_total_price_toys(brand), brand))
+    print_total_revenue(calc_total_revenue(brand))
+  end
+end
+
+# Print ascii art and date for the report
+def print_heading
+  ascii_art_sales_report
+  show_today_date
+end
+
+# Print products and brands sections for the report
+def print_data
+  make_products_section
+  make_brands_section
+end
+
+# Report consists of heading and data
+def create_report
+  print_heading
+  print_data
+end
+
+def start
+  setup_files # load, read, parse, and create the files
+  create_report # create the report!
+end
+
+start
