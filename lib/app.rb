@@ -69,10 +69,7 @@ end
 
 # Calculate and print the total amount of sales with inject
 def calc_total_sales(toy)
-  total_sales = toy['purchases'].inject(0) do |sum, purchase|
-    sum + purchase['price'].to_f
-  end
-  total_sales
+  toy['purchases'].inject(0) { |sum, purchase| sum + purchase['price'].to_f }
 end
 
 def print_total_sales(total_sales)
